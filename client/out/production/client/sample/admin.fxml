@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdminController">
+   <children>
+      <GridPane maxHeight="1015.0" maxWidth="1920.0" minHeight="1015.0" minWidth="1920.0" styleClass="adminGrid" stylesheets="@styles/styles.css">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Pane maxHeight="930.0" maxWidth="1350.0" minHeight="930.0" minWidth="1350.0" styleClass="canvasPane" GridPane.rowIndex="1">
+               <children>
+                  <Canvas fx:id="canvas" height="930.0" onMouseClicked="#addStation" width="1350.0" />
+               </children>
+               <GridPane.margin>
+                  <Insets left="42.0" />
+               </GridPane.margin>
+            </Pane>
+            <Accordion maxHeight="1015.0" minHeight="1015.0" styleClass="commandPane" GridPane.columnIndex="3" GridPane.rowIndex="1">
+              <panes>
+                <TitledPane animated="false" text="Add Station">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="939.0" prefWidth="478.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label text="Station name" />
+                                    <TextField fx:id="stationName" />
+                                    <Label styleClass="secondaryText" text="*Click on the canvas to add the station">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin></Label>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" text="Add Route">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="936.0" prefWidth="478.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox prefHeight="24.0" prefWidth="200.0" spacing="60.0">
+                                       <children>
+                                          <Label text="Route name" />
+                                          <TextField fx:id="routeNameAdd" prefHeight="26.0" prefWidth="320.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="24.0" prefWidth="200.0" spacing="29.0">
+                                       <children>
+                                          <Label text="Frequency (mins)" />
+                                          <Spinner fx:id="frequency" initialValue="30" max="60" min="10" prefHeight="26.0" prefWidth="319.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="24.0" prefWidth="480.0" spacing="20.0">
+                                       <children>
+                                          <Label text="Number of stations">
+                                             <HBox.margin>
+                                                <Insets top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Spinner fx:id="numberOfStations" initialValue="5" max="20" min="2" prefHeight="26.0" prefWidth="319.0" />
+                                       </children>
+                                    </HBox>
+                                    <Button mnemonicParsing="false" onMouseClicked="#addRouteConfig" prefHeight="26.0" prefWidth="457.0" text="Configure Route">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Label fx:id="errInvalidRouteConfig" text="Error: Invalid route configuration">
+                                       <styleClass>
+                                          <String fx:value="error" />
+                                          <String fx:value="hidden" />
+                                       </styleClass></Label>
+                                    <ListView fx:id="stationList" prefHeight="250.0" prefWidth="200.0" styleClass="hidden" />
+                                    <Button fx:id="addRouteSubmitBtn" minWidth="457.0" mnemonicParsing="false" onMouseClicked="#addRouteSubmit" styleClass="hidden" text="Submit">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" text="Delete Route">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="918.0" prefWidth="478.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label text="Route name" />
+                                    <TextField fx:id="routeName">
+                                       <VBox.margin>
+                                          <Insets top="-5.0" />
+                                       </VBox.margin></TextField>
+                                    <Label fx:id="errInvalidRouteName" text="Error: Invalid route name">
+                                       <styleClass>
+                                          <String fx:value="error" />
+                                          <String fx:value="hidden" />
+                                       </styleClass></Label>
+                                    <Button minWidth="455.0" mnemonicParsing="false" onMouseClicked="#deleteRouteSubmit" prefHeight="26.0" prefWidth="455.0" text="Submit">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+              </panes>
+            </Accordion>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
